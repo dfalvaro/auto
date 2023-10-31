@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <div class="p-col-12">
+        <div class="card">
+            <div class="ui-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                    <div class="ui-fluid p-formgrid p-grid">
+
+                        <div class="p-field p-col-12 p-md-6" >
+                            <p:outputLabel style="font-weight: bold" for="txtPlaca" value="Placa" />
+                            <p:inputText id="txtPlaca"  
+                                         required="true"
+                                         value="#{autoDM.auto.placa}"
+                                         style="text-transform: uppercase;" 
+                                         >
+                                <p:ajax />
+                            </p:inputText>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6" >
+                            <p:outputLabel style="font-weight: bold" for="txtModelo" value="Modelo" />
+                            <p:selectOneMenu id="txtModelo" 
+                                             value="#{autoDM.auto.modelo}" required="true"
+                                             styleClass ="text-base border-round
+                                             appearance-none outline-none focus:border-primary w-full">
+                                <f:selectItem itemLabel="--Seleccione--" 
+                                              itemValue="#{null}"
+                                              noSelectionOption="true"/>
+                                <f:selectItems value="#{autoDM.listaModelos}"
+                                               var="modelo"
+                                               itemLabel="#{modelo.nombre}"
+                                               itemValue="#{modelo.nombre}"/>
+
+                                <p:ajax/>
+                            </p:selectOneMenu>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6" >
+                            <p:outputLabel style="font-weight: bold" for="txtAnio" value="Año" />
+                            <p:inputText id="txtAnio"  
+                                         required="true"
+                                         requiredMessage="Campo obligatorio" 
+                                         value="#{autoDM.auto.anio}"
+                                         style="text-transform: uppercase;" 
+                                         >
+                                <p:ajax />
+                            </p:inputText>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6" >
+                            <p:outputLabel style="font-weight: bold" for="txtFCompra" value="Fecha Compra" />
+                            <p:datePicker id="txtFCompra"
+                                          value="#{autoDM.auto.fechaCompra}" 
+                                          required="true"
+                                          monthNavigator="true" yearNavigator="true" showWeek="true" />
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6" >
+                            <p:outputLabel style="font-weight: bold" for="txtObs" value="Observación" />
+                            <p:inputTextarea id="txtObs"  
+                                             value="#{autoDM.auto.observacion}"
+                                             style="text-transform: uppercase;" 
+                                             >
+                                <p:ajax />
+                            </p:inputTextarea>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <center>
+                <p:commandButton value="Guardar Auto"
+                                 action="#{autoController.guardar()}"
+                                 process="@this,panelAuto"
+                                 update="panelAuto,listaAutos, mensaje"
+                                 style="margin: 5px"
+                                 >
+
+                </p:commandButton>
+            </center>
+
+
+
+        </div>
+    </div>
+
+
+</html>

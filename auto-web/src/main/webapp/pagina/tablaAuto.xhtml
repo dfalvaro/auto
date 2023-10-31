@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:dataTable widgetVar="listaAutos"
+                 id="listaAutos" 
+                 value="#{autoDM.listaAutos}"  
+                 var="auto" 
+                 rowKey="#{auto.id}" 
+                 emptyMessage="No se encontraron registros"
+                 reflow="true"
+                 paginator="true"
+                 paginatorPosition="bottom"
+                 rows="10"
+                 >
+        <f:facet name="header">
+            Listado de Autos : #{autoDM.listaAutos.size()}
+        </f:facet>
+
+        <f:facet name="header">
+            <div class="customers-table-header">
+                <span class="ui-input-icon-left filter-container">
+                    <i class="pi pi-search"/>
+                    <p:inputText id="globalFilter" onkeyup="PF('listaAutos').filter()" placeholder="Buscar"/>
+                </span>
+            </div>
+        </f:facet>
+
+
+
+        <p:column  headerText="Placa"  colspan="2" sortBy="#{auto.placa}" filterBy="#{auto.placa}"
+                   >
+            <h:outputText value="#{auto.placa}" />
+        </p:column>
+
+        <p:column  headerText="Año"  colspan="2" sortBy="#{auto.anio}" filterBy="#{auto.anio}"
+                   >
+            <h:outputText value="#{auto.anio}" />
+        </p:column>
+
+        <p:column  headerText="Fecha Compra"  colspan="2" sortBy="#{auto.fechaCompra}" filterBy="#{auto.fechaCompra}"
+                   >
+            <h:outputText value="#{auto.fechaCompra}" >
+                <f:convertDateTime pattern="dd-MM-yyyy" />
+            </h:outputText>
+        </p:column>
+
+        <p:column  headerText="Fecha Compra"  colspan="2" sortBy="#{auto.fechaCompra}" filterBy="#{auto.fechaCompra}"
+                   >
+            <h:outputText value="#{auto.precio}" />
+        </p:column>
+        <p:column  headerText="Opciones" colspan="3" style="text-align: center"
+                   >
+
+            <p:commandButton value="Editar"
+                             action="#{autoController.editar(auto)}"
+                             process="@this"
+                             update="panelAuto"
+                             style="margin: 5px"
+                             >
+
+            </p:commandButton>
+            <p:commandButton value="Eliminar"
+                             action="#{autoController.eliminar(auto)}"
+                             process="@this"
+                             update="listaAutos,mensaje"
+                             style="margin: 5px; background-color: red"
+                             >
+
+            </p:commandButton>
+        </p:column>
+
+
+    </p:dataTable>
+
+
+</html>
